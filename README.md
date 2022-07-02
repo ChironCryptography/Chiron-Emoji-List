@@ -1,7 +1,7 @@
 # Chiron Cryptography, Inc.
 
 ### Chiron Unicode List
-A simple tool that downloads a list of emoji from unicode.org and generates a specified data structure to read it from.
+A simple list of all emoji characters and their tags. Included in this repo as well is a code generation tool that can update the list automatically using official unicode.org data.
 
 ### Usage
 #### C#
