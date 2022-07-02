@@ -7,3 +7,5 @@ Currently this tool only supports a static C# file, but if anyone shows interest
  - [C#](https://github.com/jamieyello/Chiron-Unicode-List/blob/master/Output/CS/UnicodeList.cs)
  
  If you want to make sure the list is up to date, run the tool to output a new up-to-date file.
+
+Chiron Cryptography, Inc.
