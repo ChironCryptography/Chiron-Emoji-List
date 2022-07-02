@@ -13,5 +13,7 @@ Currently this tool only supports a static C# file, if interest is shown support
 ### Example
 #### C#
 ```
-foreach (var unicode in UnicodeList.All) Console.WriteLine(unicode.Variations.First().Description);
+foreach (var unicode in UnicodeList.All) {
+    Console.WriteLine(unicode.Variations.First().Description);
+}
 ```
