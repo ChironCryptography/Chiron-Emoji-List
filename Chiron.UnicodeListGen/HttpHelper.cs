@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chiron.UnicodeList
+namespace Chiron.UnicodeListGen
 {
     internal static class HttpHelper
     {

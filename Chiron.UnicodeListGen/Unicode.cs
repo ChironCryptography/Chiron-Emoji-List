@@ -1,4 +1,4 @@
-﻿namespace Chiron.UnicodeList
+﻿namespace Chiron.UnicodeListGen
 {
     public class Unicode
     {

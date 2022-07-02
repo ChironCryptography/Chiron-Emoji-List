@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static Chiron.UnicodeList.UnicodeVariation;
+using static Chiron.UnicodeListGen.UnicodeVariation;
 
-namespace Chiron.UnicodeList.CodeGeneration
+namespace Chiron.UnicodeListGen.CodeGeneration
 {
     internal static class CSharp
     {
@@ -49,7 +49,12 @@ namespace Chiron.UnicodeList.CodeGeneration
         static string GetNewUnicode(Unicode unicode) {
             var @base = "new Unicode(new UnicodeVariation[] { @new_variations })";
             var new_variations = string.Join(", ", (from v in unicode.Variations select 
-                $"new UnicodeVariation() {{ CodePoint = {v.CodePoint}, Description = {v.Description.ToLiteral()}, TypeField = {nameof(UnicodeVariation)}.{nameof(TypeFieldType)}.{v.TypeField} }}"));
+                $"new UnicodeVariation() {{ " +
+                    $"CodePoint = {v.CodePoint}, " +
+                    $"Description = {v.Description.ToLiteral()}, " +
+                    $"TypeField = {nameof(UnicodeVariation)}.{nameof(TypeFieldType)}.{v.TypeField}, " +
+                    $"Tags = new string[] {{ {string.Join(", ", (from t in v.Tags select t.ToLiteral()))} }}" +
+                $"}}"));
             return @base.Replace("@new_variations", new_variations);
         }
 
