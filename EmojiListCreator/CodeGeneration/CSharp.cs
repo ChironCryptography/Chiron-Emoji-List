@@ -21,7 +21,9 @@ namespace Chiron.UnicodeList.CodeGeneration
             "{\n" +
             "    public static class UnicodeList\n" +
             "    {\n" +
-            "@content" +
+            "@content\n" +
+            "        /// <summary> All contained unicode characters. </summary>\n" +
+            "        public static List<Unicode> All { get; } = (from p in typeof(UnicodeList).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public) where p.PropertyType == typeof(Unicode) select (Unicode)p.GetValue(null)).ToList();\n" +
             "    }\n" +
             "}\n";
 

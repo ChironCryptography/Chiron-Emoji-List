@@ -1,4 +1,37 @@
-﻿namespace Chiron.UnicodeList
+﻿// ----------------------------------------------------------
+// This file is was auto-generated using Chiron.UnicodeList.
+// ----------------------------------------------------------
+
+//namespace Chiron.UnicodeList
+//{
+//    public class Unicode
+//    {
+//        public Unicode() { }
+//        public Unicode(IEnumerable<UnicodeVariation> variations) => Variations = new(variations);
+//        public List<UnicodeVariation> Variations { get; set; } = new();
+//    }
+//}
+
+//namespace Chiron.UnicodeList
+//{
+//    public class UnicodeVariation
+//    {
+//        public enum TypeFieldType
+//        {
+//            Basic_Emoji,
+//            Emoji_Keycap_Sequence,
+//            RGI_Emoji_Flag_Sequence,
+//            RGI_Emoji_Tag_Sequence,
+//            RGI_Emoji_Modifier_Sequence,
+//        }
+
+//        public int CodePoint { get; set; }
+//        public TypeFieldType TypeField { get; set; }
+//        public string Description { get; set; }
+//    }
+//}
+
+namespace Chiron.UnicodeList
 {
     public static class UnicodeList
     {
@@ -1398,5 +1431,8 @@
         public static Unicode HeartHandsMediumSkinTone { get; } = new Unicode(new UnicodeVariation[] { new UnicodeVariation() { CodePoint = 129782, Description = "heart hands: medium skin tone", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_Modifier_Sequence }, new UnicodeVariation() { CodePoint = 127997, Description = "heart hands: medium skin tone", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_Modifier_Sequence } });
         public static Unicode HeartHandsMediumDarkSkinTone { get; } = new Unicode(new UnicodeVariation[] { new UnicodeVariation() { CodePoint = 129782, Description = "heart hands: medium-dark skin tone", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_Modifier_Sequence }, new UnicodeVariation() { CodePoint = 127998, Description = "heart hands: medium-dark skin tone", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_Modifier_Sequence } });
         public static Unicode HeartHandsDarkSkinTone { get; } = new Unicode(new UnicodeVariation[] { new UnicodeVariation() { CodePoint = 129782, Description = "heart hands: dark skin tone", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_Modifier_Sequence }, new UnicodeVariation() { CodePoint = 127999, Description = "heart hands: dark skin tone", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_Modifier_Sequence } });
+
+        /// <summary> All contained unicode characters. </summary>
+        public static List<Unicode> All { get; } = (from p in typeof(UnicodeList).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public) where p.PropertyType == typeof(Unicode) select (Unicode)p.GetValue(null)).ToList();
     }
 }

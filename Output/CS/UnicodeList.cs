@@ -1430,5 +1430,8 @@ namespace Chiron.UnicodeList
         public static Unicode HeartHandsMediumSkinTone { get; } = new Unicode(new UnicodeVariation[] { new UnicodeVariation() { CodePoint = 129782, Description = "heart hands: medium skin tone", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_Modifier_Sequence }, new UnicodeVariation() { CodePoint = 127997, Description = "heart hands: medium skin tone", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_Modifier_Sequence } });
         public static Unicode HeartHandsMediumDarkSkinTone { get; } = new Unicode(new UnicodeVariation[] { new UnicodeVariation() { CodePoint = 129782, Description = "heart hands: medium-dark skin tone", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_Modifier_Sequence }, new UnicodeVariation() { CodePoint = 127998, Description = "heart hands: medium-dark skin tone", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_Modifier_Sequence } });
         public static Unicode HeartHandsDarkSkinTone { get; } = new Unicode(new UnicodeVariation[] { new UnicodeVariation() { CodePoint = 129782, Description = "heart hands: dark skin tone", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_Modifier_Sequence }, new UnicodeVariation() { CodePoint = 127999, Description = "heart hands: dark skin tone", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_Modifier_Sequence } });
+
+        /// <summary> All contained unicode characters. </summary>
+        public static List<Unicode> All { get; } = (from p in typeof(UnicodeList).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public) where p.PropertyType == typeof(Unicode) select (Unicode)p.GetValue(null)).ToList();
     }
 }
