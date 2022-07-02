@@ -17,11 +17,6 @@ namespace Chiron.UnicodeList
             File.WriteAllText("UnicodeList.cs", code);
 
             Console.WriteLine("Wrote output to 'UnicodeList.cs'.");
-            foreach (var unicode in UnicodeList.All)
-            {
-                Console.WriteLine(unicode.Variations.First().Description);
-            }
-
             Console.WriteLine("Done.");
         }
     }
