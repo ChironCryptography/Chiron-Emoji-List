@@ -19,6 +19,21 @@ namespace Chiron.UnicodeListGen.CodeGeneration
             "@content\n" +
             "        /// <summary> All contained unicode characters. </summary>\n" +
             "        public static List<Unicode> All { get; } = (from p in typeof(EmojiList).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public) where p.PropertyType == typeof(Unicode) select (Unicode)p.GetValue(null)).ToList();\n" +
+            "        \n" +
+            "        public static Dictionary<int, UnicodeVariation> CodePointLookup { get; } = CreateCodePointLookup();\n" +
+            "        \n" +
+            "        static Dictionary<int, UnicodeVariation> CreateCodePointLookup() {\n" +
+            "            var res = new Dictionary<int, UnicodeVariation>();\n" +
+            "            foreach (var u in All) {\n" +
+            "                foreach (var v in u.Variations) {\n" +
+            "                    if (res.ContainsKey(v.CodePoint)) continue;\n" +
+            "                    res.Add(v.CodePoint, v);\n" +
+            "                }\n" +
+            "            }\n" +
+            "            return res;\n" +
+            "        }\n" +
+            "       \n" +
+            "        public static List<UnicodeVariation> AllOrdered { get; } = (from o in Ordered select CodePointLookup[o]).ToList();\n" +
             "    }\n" +
             "}\n";
 
@@ -54,9 +69,13 @@ namespace Chiron.UnicodeListGen.CodeGeneration
             return @base.Replace("@new_variations", new_variations);
         }
 
-        public static string Generate(List<Unicode> data) {
+        static string GetOrderingField(List<int> ordering) => 
+            $"        static List<int> Ordered = new() {{ {string.Join(", ", ordering)} }};\n";
+        
+        public static string Generate(List<Unicode> data, List<int> ordering) {
             StringBuilder content = new();
             foreach (var unicode in data) content.Append(GetUnicodeField(unicode) + '\n');
+            content.Append(GetOrderingField(ordering));
             return HEAD + Unicode_cs + UnicodeVariation_cs + CodePointFormatter_cs + BASE.Replace("@content", content.ToString());
         }
     }

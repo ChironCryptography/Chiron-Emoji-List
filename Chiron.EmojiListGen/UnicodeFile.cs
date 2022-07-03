@@ -14,8 +14,21 @@ namespace Chiron.UnicodeListGen
             zwj_sequences,
         }
 
-        /// <summary> Indexed by description. </summary>
-        public static void Parse(string text, FileType file, Dictionary<string, Unicode> res) {
+        /// <summary> Parse emoji-ordering.txt </summary>
+        public static List<int> ParseOrder(string text) {
+            var res = new List<int>();
+            using var sr = new StringReader(text);
+            string codepoints;
+            while ((codepoints = sr.ReadLine()) != null) {
+                codepoints = Regex.Replace(codepoints, @"#.*", "").Split(';').FirstOrDefault()?.Trim();
+                if (string.IsNullOrEmpty(codepoints)) continue;
+                res.AddRange(ParseCode(codepoints));
+            }
+            return res;
+        }
+
+            /// <summary> Indexed by description. </summary>
+            public static void Parse(string text, FileType file, Dictionary<string, Unicode> res) {
             using var sr = new StringReader(text);
             string line;
             while ((line = sr.ReadLine()) != null) {
@@ -68,11 +81,11 @@ namespace Chiron.UnicodeListGen
             foreach (var code in code_line.Split(' ')) {
                 if (code.Contains("..")) {
                     var range = code.Split("..");
-                    int first = Convert.ToInt32("0x" + range[0].ToLower(), 16);
-                    int last = Convert.ToInt32("0x" + range[1].ToLower(), 16);
+                    int first = Convert.ToInt32("0x" + range[0].ToLower().Replace("u+", ""), 16);
+                    int last = Convert.ToInt32("0x" + range[1].ToLower().Replace("u+", ""), 16);
                     for (int i = first; i <= last; i++) yield return i;
                 }
-                else yield return Convert.ToInt32("0x" + code, 16);
+                else yield return Convert.ToInt32(("0x" + code.ToLower().Replace("u+", "")), 16);
             }
         }
     }

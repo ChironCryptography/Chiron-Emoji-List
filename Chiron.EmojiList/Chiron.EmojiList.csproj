@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-	<PackageVersion>1.0.3</PackageVersion>
+	<PackageVersion>1.0.4</PackageVersion>
 	<RepositoryUrl>https://github.com/ChironCryptography/Chiron-Unicode-List</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
