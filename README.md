@@ -16,6 +16,8 @@ foreach (var e in Chiron.EmojiList.All) {
 ```
 
 #### C# Blazor
+[Install the Nuget package.](https://www.nuget.org/packages/Chiron.EmojiList/)
+
 ```
 <p>p @Chiron.EmojiList.Airplane</p>
 
