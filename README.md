@@ -15,7 +15,7 @@ foreach (var e in Chiron.EmojiList.All) {
 }
 ```
 
-##### Blazor;
+#### C# Blazor
 ```
 <p>p @Chiron.EmojiList.Airplane</p>
 
