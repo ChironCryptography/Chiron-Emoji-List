@@ -14,3 +14,6 @@ foreach (var e in Chiron.EmojiList.All) {
     Console.WriteLine(e);
 }
 ```
+
+### Notes
+If you are missing emoji, they are displaying as boxes/something else, then you need to make sure that you have a font that can handle them all. [Twemoji](https://twemoji.twitter.com/) is a good open-source font that solves this.
