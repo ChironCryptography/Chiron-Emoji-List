@@ -15,5 +15,18 @@ foreach (var e in Chiron.EmojiList.All) {
 }
 ```
 
+##### Blazor;
+```
+<p>p @Chiron.EmojiList.Airplane</p>
+
+@foreach (var e in Chiron.EmojiList.All) {
+    <p>
+    @foreach (var v in e.Variations) {
+        @v
+    }
+    </p>
+}
+```
+
 ### Notes
 If you are missing emoji, they are displaying as boxes/something else, then you need to make sure that you have a font that can handle them all. [Twemoji](https://twemoji.twitter.com/) is a good open-source font that solves this.
