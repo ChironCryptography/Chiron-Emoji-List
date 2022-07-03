@@ -10,7 +10,8 @@ namespace Chiron
         public Unicode(IEnumerable<UnicodeVariation> variations) => Variations = new(variations);
         public List<UnicodeVariation> Variations { get; set; } = new();
 
-        public override string ToString() => ((char)Variations.First().CodePoint).ToString();
+        public override string ToString() => 
+            char.ConvertFromUtf32(Variations.First().CodePoint);
 
         public string ToCodePointRepresentation() =>
             CodePointFormatter.ToCodePointRepresentation(Variations.First().CodePoint);
@@ -35,8 +36,8 @@ namespace Chiron
         public string Description { get; set; }
         public string[] Tags { get; set; } = new string[0];
 
-        public override string ToString() =>
-            ((char)CodePoint).ToString();
+        public override string ToString() => 
+            char.ConvertFromUtf32(CodePoint);
 
         public string ToCodePointRepresentation() =>
             CodePointFormatter.ToCodePointRepresentation(CodePoint);
@@ -51,7 +52,10 @@ namespace Chiron
 			"U+" + ToHexadecimal(codePoint);
 
 		public static string ToHexadecimal(int codePoint) => 
-			codePoint.ToString(codePoint < 0x100000 ? codePoint < 0x10000 ? "X4" : "X5" : "X6", System.Globalization.CultureInfo.InvariantCulture);
+			codePoint.ToString(
+				codePoint < 0x100000 ? 
+				codePoint < 0x10000 ? 
+				"X4" : "X5" : "X6", System.Globalization.CultureInfo.InvariantCulture);
 	}
 }
 

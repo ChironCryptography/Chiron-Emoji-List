@@ -16,8 +16,8 @@
         public string Description { get; set; }
         public string[] Tags { get; set; } = new string[0];
 
-        public override string ToString() =>
-            ((char)CodePoint).ToString();
+        public override string ToString() => 
+            char.ConvertFromUtf32(CodePoint);
 
         public string ToCodePointRepresentation() =>
             CodePointFormatter.ToCodePointRepresentation(CodePoint);
