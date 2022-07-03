@@ -5,7 +5,7 @@ A simple list of all emoji characters and their tags. Included in this repo as w
 
 ### Usage
 #### C#
-[Install the Nuget package.](https://www.nuget.org/packages/Chiron.EmojiList/1.0.1)
+[Install the Nuget package.](https://www.nuget.org/packages/Chiron.EmojiList/)
 
 ```
 foreach (var unicode in UnicodeList.All) {
