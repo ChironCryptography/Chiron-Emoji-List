@@ -18,9 +18,9 @@ namespace Chiron.UnicodeListGen
 
             Console.WriteLine("Generating cs file...");
             var code = CodeGeneration.CSharp.Generate(res_l);
-            File.WriteAllText("UnicodeList.cs", code);
+            File.WriteAllText("CodeGen.cs", code);
 
-            Console.WriteLine("Wrote output to 'UnicodeList.cs'.");
+            Console.WriteLine("Wrote output to 'CodeGen.cs'.");
             Console.WriteLine("Done.");
         }
     }

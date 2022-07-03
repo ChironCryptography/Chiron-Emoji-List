@@ -1,16 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-	<PackageVersion>1.0.0</PackageVersion>
+	<PackageVersion>1.0.2</PackageVersion>
 	<RepositoryUrl>https://github.com/ChironCryptography/Chiron-Unicode-List</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<Copyright>Chiron Cryptography, Inc.</Copyright>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<Authors>Chiron Cryptography Inc.</Authors>
+	<Description>A simple list of all emoji characters and their tags.</Description>
   </PropertyGroup>
-
 </Project>

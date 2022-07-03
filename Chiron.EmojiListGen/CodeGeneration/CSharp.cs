@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using static Chiron.UnicodeListGen.UnicodeVariation;
+using static Chiron.UnicodeVariation;
 
 namespace Chiron.UnicodeListGen.CodeGeneration
 {
@@ -13,22 +8,23 @@ namespace Chiron.UnicodeListGen.CodeGeneration
     {
         const string HEAD =
             "// ----------------------------------------------------------\n" +
-            "// This file is was auto-generated using Chiron.UnicodeList.\n" +
+            "// This file is was auto-generated using Chiron.EmojiList.\n" +
             "// ----------------------------------------------------------\n\n";
 
         const string BASE =
-            "namespace Chiron.UnicodeList\n" +
+            "namespace Chiron\n" +
             "{\n" +
-            "    public static class UnicodeList\n" +
+            "    public static class EmojiList\n" +
             "    {\n" +
             "@content\n" +
             "        /// <summary> All contained unicode characters. </summary>\n" +
-            "        public static List<Unicode> All { get; } = (from p in typeof(UnicodeList).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public) where p.PropertyType == typeof(Unicode) select (Unicode)p.GetValue(null)).ToList();\n" +
+            "        public static List<Unicode> All { get; } = (from p in typeof(EmojiList).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public) where p.PropertyType == typeof(Unicode) select (Unicode)p.GetValue(null)).ToList();\n" +
             "    }\n" +
             "}\n";
 
         static string Unicode_cs { get; } = File.ReadAllText("Unicode.cs");
         static string UnicodeVariation_cs { get; } = File.ReadAllText("UnicodeVariation.cs");
+        static string CodePointFormatter_cs { get; } = File.ReadAllText("CodePointFormatter.cs");
 
         static string GetUnicodeField(Unicode unicode) {
             var name =
@@ -61,7 +57,7 @@ namespace Chiron.UnicodeListGen.CodeGeneration
         public static string Generate(List<Unicode> data) {
             StringBuilder content = new();
             foreach (var unicode in data) content.Append(GetUnicodeField(unicode) + '\n');
-            return HEAD + Unicode_cs + UnicodeVariation_cs + BASE.Replace("@content", content.ToString());
+            return HEAD + Unicode_cs + UnicodeVariation_cs + CodePointFormatter_cs + BASE.Replace("@content", content.ToString());
         }
     }
 }

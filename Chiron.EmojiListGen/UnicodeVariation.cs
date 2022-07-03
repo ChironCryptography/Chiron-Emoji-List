@@ -1,4 +1,4 @@
-﻿namespace Chiron.UnicodeListGen
+﻿namespace Chiron
 {
     public class UnicodeVariation
     {
@@ -15,6 +15,12 @@
         public TypeFieldType TypeField { get; set; }
         public string Description { get; set; }
         public string[] Tags { get; set; } = new string[0];
+
+        public override string ToString() =>
+            ((char)CodePoint).ToString();
+
+        public string ToCodePointRepresentation() =>
+            CodePointFormatter.ToCodePointRepresentation(CodePoint);
     }
 }
 

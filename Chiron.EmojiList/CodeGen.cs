@@ -1,18 +1,23 @@
 // ----------------------------------------------------------
-// This file is was auto-generated using Chiron.UnicodeList.
+// This file is was auto-generated using Chiron.EmojiList.
 // ----------------------------------------------------------
 
-namespace Chiron.UnicodeList
+namespace Chiron
 {
     public class Unicode
     {
         public Unicode() { }
         public Unicode(IEnumerable<UnicodeVariation> variations) => Variations = new(variations);
         public List<UnicodeVariation> Variations { get; set; } = new();
+
+        public override string ToString() => ((char)Variations.First().CodePoint).ToString();
+
+        public string ToCodePointRepresentation() =>
+            CodePointFormatter.ToCodePointRepresentation(Variations.First().CodePoint);
     }
 }
 
-namespace Chiron.UnicodeList
+namespace Chiron
 {
     public class UnicodeVariation
     {
@@ -29,12 +34,30 @@ namespace Chiron.UnicodeList
         public TypeFieldType TypeField { get; set; }
         public string Description { get; set; }
         public string[] Tags { get; set; } = new string[0];
+
+        public override string ToString() =>
+            ((char)CodePoint).ToString();
+
+        public string ToCodePointRepresentation() =>
+            CodePointFormatter.ToCodePointRepresentation(CodePoint);
     }
 }
 
-namespace Chiron.UnicodeList
+namespace Chiron
 {
-    public static class UnicodeList
+	public static class CodePointFormatter
+	{
+		public static string ToCodePointRepresentation(int codePoint) => 
+			"U+" + ToHexadecimal(codePoint);
+
+		public static string ToHexadecimal(int codePoint) => 
+			codePoint.ToString(codePoint < 0x100000 ? codePoint < 0x10000 ? "X4" : "X5" : "X6", System.Globalization.CultureInfo.InvariantCulture);
+	}
+}
+
+namespace Chiron
+{
+    public static class EmojiList
     {
         public static Unicode Watch { get; } = new Unicode(new UnicodeVariation[] { new UnicodeVariation() { CodePoint = 8986, Description = "watch", TypeField = UnicodeVariation.TypeFieldType.Basic_Emoji, Tags = new string[] {  }}, new UnicodeVariation() { CodePoint = 8987, Description = "watch", TypeField = UnicodeVariation.TypeFieldType.Basic_Emoji, Tags = new string[] {  }} });
         public static Unicode FastForwardButton { get; } = new Unicode(new UnicodeVariation[] { new UnicodeVariation() { CodePoint = 9193, Description = "fast-forward button", TypeField = UnicodeVariation.TypeFieldType.Basic_Emoji, Tags = new string[] {  }}, new UnicodeVariation() { CodePoint = 9194, Description = "fast-forward button", TypeField = UnicodeVariation.TypeFieldType.Basic_Emoji, Tags = new string[] {  }}, new UnicodeVariation() { CodePoint = 9195, Description = "fast-forward button", TypeField = UnicodeVariation.TypeFieldType.Basic_Emoji, Tags = new string[] {  }}, new UnicodeVariation() { CodePoint = 9196, Description = "fast-forward button", TypeField = UnicodeVariation.TypeFieldType.Basic_Emoji, Tags = new string[] {  }} });
@@ -1615,6 +1638,6 @@ namespace Chiron.UnicodeList
         public static Unicode FaceInClouds { get; } = new Unicode(new UnicodeVariation[] { new UnicodeVariation() { CodePoint = 128566, Description = "face in clouds", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_ZWJ_Sequence, Tags = new string[] {  }}, new UnicodeVariation() { CodePoint = 8205, Description = "face in clouds", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_ZWJ_Sequence, Tags = new string[] {  }}, new UnicodeVariation() { CodePoint = 127787, Description = "face in clouds", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_ZWJ_Sequence, Tags = new string[] {  }}, new UnicodeVariation() { CodePoint = 65039, Description = "face in clouds", TypeField = UnicodeVariation.TypeFieldType.RGI_Emoji_ZWJ_Sequence, Tags = new string[] {  }} });
 
         /// <summary> All contained unicode characters. </summary>
-        public static List<Unicode> All { get; } = (from p in typeof(UnicodeList).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public) where p.PropertyType == typeof(Unicode) select (Unicode)p.GetValue(null)).ToList();
+        public static List<Unicode> All { get; } = (from p in typeof(EmojiList).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public) where p.PropertyType == typeof(Unicode) select (Unicode)p.GetValue(null)).ToList();
     }
 }
