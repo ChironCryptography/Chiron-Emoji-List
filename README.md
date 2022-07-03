@@ -8,6 +8,8 @@ A simple list of all emoji characters and their tags. Included in this repo as w
 [Install the Nuget package.](https://www.nuget.org/packages/Chiron.EmojiList/)
 
 ```
+Console.WriteLine(Chiron.EmojiList.Airplane);
+
 foreach (var e in Chiron.EmojiList.All) {
     Console.WriteLine(e);
 }
