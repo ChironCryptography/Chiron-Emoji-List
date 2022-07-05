@@ -3,11 +3,16 @@
     public class EmojiTabCollection : IList<UnicodeVariation>
     {
         public UnicodeVariation this[int index] { get => ((IList<UnicodeVariation>)Emoji)[index]; set => ((IList<UnicodeVariation>)Emoji)[index] = value; }
+        public string Name { get; init; }
         public UnicodeVariation Representitive { get; init; }
         public List<UnicodeVariation> Emoji { get; init; } = new();
 
         public EmojiTabCollection() { }
-        public EmojiTabCollection(IEnumerable<UnicodeVariation> items) => Emoji = new(items);
+        public EmojiTabCollection(IEnumerable<UnicodeVariation> items, string name, string representitive) {
+            Emoji = new(items);
+            Name = name;
+            Representitive = (from e in items where e.CodePoint == representitive select e).First();
+        }
 
         #region IList
         public int Count => ((ICollection<UnicodeVariation>)Emoji).Count;

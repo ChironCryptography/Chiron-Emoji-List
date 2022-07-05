@@ -45,20 +45,20 @@ namespace Chiron.UnicodeListGen.CodeGeneration
             "        }\n" +
             "        \n" +
             "        public static EmojiTabCollections Categories { get; } = new() {\n" +
-            "            Faces = new(AllOrdered[OrderedIndexOfEmoji(\"😀\")..OrderedIndexOfEmoji(\"🙊\")]),\n" +
-            "            Heart = new(AllOrdered[OrderedIndexOfEmoji(\"💋\")..OrderedIndexOfEmoji(\"💤\")]),\n" +
-            "            Hands = new(AllOrdered[OrderedIndexOfEmoji(\"👋\")..OrderedIndexOfEmoji(\"🫦\")]),\n" +
-            "            People = new(AllOrdered[OrderedIndexOfEmoji(\"👶\")..OrderedIndexOfEmoji(\"🦲\")]),\n" +
-            "            Animals = new(AllOrdered[OrderedIndexOfEmoji(\"🐵\")..OrderedIndexOfEmoji(\"🦠\")]),\n" +
-            "            Plants = new(AllOrdered[OrderedIndexOfEmoji(\"💐\")..OrderedIndexOfEmoji(\"🫘\")]),\n" +
-            "            Food = new(AllOrdered[OrderedIndexOfEmoji(\"🍇\")..OrderedIndexOfEmoji(\"🫙\")]),\n" +
-            "            Places = new(AllOrdered[OrderedIndexOfEmoji(\"🏺\")..OrderedIndexOfEmoji(\"🚞\")]),\n" +
-            "            Transportation = new(AllOrdered[OrderedIndexOfEmoji(\"🚋\")..OrderedIndexOfEmoji(\"🧳\")]),\n" +
-            "            Time = new(AllOrdered[OrderedIndexOfEmoji(\"⌛\")..OrderedIndexOfEmoji(\"🕦\")]),\n" +
-            "            Astral = new(AllOrdered[OrderedIndexOfEmoji(\"🌑\")..OrderedIndexOfEmoji(\"⚡\")]),\n" +
-            "            Misc = new(AllOrdered[OrderedIndexOfEmoji(\"⛄\")..OrderedIndexOfEmoji(\"🪪\")]),\n" +
-            "            Signs = new(AllOrdered[OrderedIndexOfEmoji(\"🏧\")..OrderedIndexOfEmoji(\"🔲\")]),\n" +
-            "            Flags = new(AllOrdered[OrderedIndexOfEmoji(\"🏁\")..OrderedIndexOfEmoji(\"🏴󠁧󠁢󠁷󠁬󠁳󠁿\")]),\n" +
+            "            Faces = new(AllOrdered[OrderedIndexOfEmoji(\"😀\")..OrderedIndexOfEmoji(\"🙊\")], \"Faces\", \"😀\"),\n" +
+            "            Heart = new(AllOrdered[OrderedIndexOfEmoji(\"💋\")..OrderedIndexOfEmoji(\"💤\")], \"Emotions\", \"🧡\"),\n" +
+            "            Hands = new(AllOrdered[OrderedIndexOfEmoji(\"👋\")..OrderedIndexOfEmoji(\"🫦\")], \"Body Parts\", \"👋\"),\n" +
+            "            People = new(AllOrdered[OrderedIndexOfEmoji(\"👶\")..OrderedIndexOfEmoji(\"🦲\")], \"People\", \"👪\"),\n" +
+            "            Animals = new(AllOrdered[OrderedIndexOfEmoji(\"🐵\")..OrderedIndexOfEmoji(\"🦠\")], \"Animals\", \"🐰\"),\n" +
+            "            Plants = new(AllOrdered[OrderedIndexOfEmoji(\"💐\")..OrderedIndexOfEmoji(\"🫘\")], \"Plants\", \"💐\"),\n" +
+            "            Food = new(AllOrdered[OrderedIndexOfEmoji(\"🍇\")..OrderedIndexOfEmoji(\"🫙\")], \"Food\", \"🍇\"),\n" +
+            "            Places = new(AllOrdered[OrderedIndexOfEmoji(\"🏺\")..OrderedIndexOfEmoji(\"🚞\")], \"Places\", \"🌆\"),\n" +
+            "            Transportation = new(AllOrdered[OrderedIndexOfEmoji(\"🚋\")..OrderedIndexOfEmoji(\"🧳\")], \"Transportation\", \"🚋\"),\n" +
+            "            Time = new(AllOrdered[OrderedIndexOfEmoji(\"⌛\")..OrderedIndexOfEmoji(\"🕦\")], \"Time\", \"⌛\"),\n" +
+            "            Astral = new(AllOrdered[OrderedIndexOfEmoji(\"🌑\")..OrderedIndexOfEmoji(\"⚡\")], \"Astral\", \"🌑\"),\n" +
+            "            Misc = new(AllOrdered[OrderedIndexOfEmoji(\"⛄\")..OrderedIndexOfEmoji(\"🪪\")], \"Misc\", \"⛄\"),\n" +
+            "            Signs = new(AllOrdered[OrderedIndexOfEmoji(\"🏧\")..OrderedIndexOfEmoji(\"🔲\")], \"Signs\", \"🏧\"),\n" +
+            "            Flags = new(AllOrdered[OrderedIndexOfEmoji(\"🏁\")..OrderedIndexOfEmoji(\"🏴󠁧󠁢󠁷󠁬󠁳󠁿\")], \"Flags\", \"🏁\"),\n" +
             "        };\n" +
             "    }\n" +
             "}\n";

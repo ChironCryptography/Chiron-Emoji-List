@@ -2,15 +2,13 @@
 // This file is was auto-generated using Chiron.EmojiList.
 // ----------------------------------------------------------
 
-using System.Collections;
-
 namespace Chiron
 {
     public class Unicode
     {
         public Unicode() { }
         public Unicode(IEnumerable<UnicodeVariation> variations) => Variations = new(variations);
-        public List<UnicodeVariation> Variations { get; init; } = new();
+        public List<UnicodeVariation> Variations { get; set; } = new();
 
         public override string ToString() => Variations.First().CodePoint;
     }
@@ -20,7 +18,8 @@ namespace Chiron
 {
     public class UnicodeVariation
     {
-        public enum TypeFieldType {
+        public enum TypeFieldType
+        {
             Basic_Emoji,
             Emoji_Keycap_Sequence,
             RGI_Emoji_Flag_Sequence,
@@ -29,10 +28,10 @@ namespace Chiron
             RGI_Emoji_ZWJ_Sequence,
         }
 
-        public string CodePoint { get; init; }
-        public TypeFieldType TypeField { get; init; }
-        public string Description { get; init; }
-        public string[] Tags { get; init; } = new string[0];
+        public string CodePoint { get; set; }
+        public TypeFieldType TypeField { get; set; }
+        public string Description { get; set; }
+        public string[] Tags { get; set; } = new string[0];
 
         public override string ToString() => CodePoint;
     }
@@ -40,30 +39,20 @@ namespace Chiron
 
 namespace Chiron
 {
-	public static class CodePointFormatter
-	{
-		public static string ToCodePointRepresentation(int codePoint) => 
-			"U+" + ToHexadecimal(codePoint);
-
-		public static string ToHexadecimal(int codePoint) => 
-			codePoint.ToString(
-				codePoint < 0x100000 ? 
-				codePoint < 0x10000 ? 
-				"X4" : "X5" : "X6", System.Globalization.CultureInfo.InvariantCulture);
-	}
-}
-
-// prototype classes --
-namespace Chiron
-{
     public class EmojiTabCollection : IList<UnicodeVariation>
     {
         public UnicodeVariation this[int index] { get => ((IList<UnicodeVariation>)Emoji)[index]; set => ((IList<UnicodeVariation>)Emoji)[index] = value; }
+        public string Name { get; init; }
         public UnicodeVariation Representitive { get; init; }
         public List<UnicodeVariation> Emoji { get; init; } = new();
 
         public EmojiTabCollection() { }
-        public EmojiTabCollection(IEnumerable<UnicodeVariation> items) => Emoji = new(items);
+        public EmojiTabCollection(IEnumerable<UnicodeVariation> items, string name, string representitive)
+        {
+            Emoji = new(items);
+            Name = name;
+            Representitive = (from e in items where e.CodePoint == representitive select e).First();
+        }
 
         #region IList
         public int Count => ((ICollection<UnicodeVariation>)Emoji).Count;
@@ -77,7 +66,7 @@ namespace Chiron
         public void Insert(int index, UnicodeVariation item) => Emoji.Insert(index, item);
         public bool Remove(UnicodeVariation item) => Emoji.Remove(item);
         public void RemoveAt(int index) => Emoji.RemoveAt(index);
-        IEnumerator IEnumerable.GetEnumerator() => Emoji.GetEnumerator();
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => Emoji.GetEnumerator();
         #endregion
     }
 }
@@ -103,7 +92,20 @@ namespace Chiron
     }
 }
 
-// --
+namespace Chiron
+{
+	public static class CodePointFormatter
+	{
+		public static string ToCodePointRepresentation(int codePoint) => 
+			"U+" + ToHexadecimal(codePoint);
+
+		public static string ToHexadecimal(int codePoint) => 
+			codePoint.ToString(
+				codePoint < 0x100000 ? 
+				codePoint < 0x10000 ? 
+				"X4" : "X5" : "X6", System.Globalization.CultureInfo.InvariantCulture);
+	}
+}
 
 namespace Chiron
 {
@@ -1703,11 +1705,9 @@ namespace Chiron
             }
             return res;
         }
-       
-        // added []
+        
         public static UnicodeVariation[] AllOrdered { get; } = Ordered.Where(s => CodePointLookup.ContainsKey(s)).Select(s => CodePointLookup[s]).ToArray();
-
-        // prototype code below
+        
         static int OrderedIndexOfEmoji(string emoji) {
             int i = 0;
             foreach (var e in AllOrdered) {
@@ -1716,22 +1716,23 @@ namespace Chiron
             }
             return -1;
         }
-
+        
+        // prototyping here
         public static EmojiTabCollections Categories { get; } = new() {
-            Faces = new(AllOrdered[OrderedIndexOfEmoji("😀")..OrderedIndexOfEmoji("🙊")]),
-            Heart = new(AllOrdered[OrderedIndexOfEmoji("💋")..OrderedIndexOfEmoji("💤")]),
-            Hands = new(AllOrdered[OrderedIndexOfEmoji("👋")..OrderedIndexOfEmoji("🫦")]),
-            People = new(AllOrdered[OrderedIndexOfEmoji("👶")..OrderedIndexOfEmoji("🦲")]),
-            Animals = new(AllOrdered[OrderedIndexOfEmoji("🐵")..OrderedIndexOfEmoji("🦠")]),
-            Plants = new(AllOrdered[OrderedIndexOfEmoji("💐")..OrderedIndexOfEmoji("🫘")]),
-            Food = new(AllOrdered[OrderedIndexOfEmoji("🍇")..OrderedIndexOfEmoji("🫙")]),
-            Places = new(AllOrdered[OrderedIndexOfEmoji("🏺")..OrderedIndexOfEmoji("🚞")]),
-            Transportation = new(AllOrdered[OrderedIndexOfEmoji("🚋")..OrderedIndexOfEmoji("🧳")]),
-            Time = new(AllOrdered[OrderedIndexOfEmoji("⌛")..OrderedIndexOfEmoji("🕦")]),
-            Astral = new(AllOrdered[OrderedIndexOfEmoji("🌑")..OrderedIndexOfEmoji("⚡")]),
-            Misc = new(AllOrdered[OrderedIndexOfEmoji("⛄")..OrderedIndexOfEmoji("🪪")]),
-            Signs = new(AllOrdered[OrderedIndexOfEmoji("🏧")..OrderedIndexOfEmoji("🔲")]),
-            Flags = new(AllOrdered[OrderedIndexOfEmoji("🏁")..OrderedIndexOfEmoji("🏴󠁧󠁢󠁷󠁬󠁳󠁿")]),
+            Faces = new(AllOrdered[OrderedIndexOfEmoji("😀")..OrderedIndexOfEmoji("🙊")], "Faces", "😀"),
+            Heart = new(AllOrdered[OrderedIndexOfEmoji("💋")..OrderedIndexOfEmoji("💤")], "Emotions", "🧡"),
+            Hands = new(AllOrdered[OrderedIndexOfEmoji("👋")..OrderedIndexOfEmoji("🫦")], "Body Parts", "👋"),
+            People = new(AllOrdered[OrderedIndexOfEmoji("👶")..OrderedIndexOfEmoji("🦲")], "People", "👪"),
+            Animals = new(AllOrdered[OrderedIndexOfEmoji("🐵")..OrderedIndexOfEmoji("🦠")], "Animals", "🐰"),
+            Plants = new(AllOrdered[OrderedIndexOfEmoji("💐")..OrderedIndexOfEmoji("🫘")], "Plants", "💐"),
+            Food = new(AllOrdered[OrderedIndexOfEmoji("🍇")..OrderedIndexOfEmoji("🫙")], "Food", "🍇"),
+            Places = new(AllOrdered[OrderedIndexOfEmoji("🏺")..OrderedIndexOfEmoji("🚞")], "Places", "🌆"),
+            Transportation = new(AllOrdered[OrderedIndexOfEmoji("🚋")..OrderedIndexOfEmoji("🧳")], "Transportation", "🚋"),
+            Time = new(AllOrdered[OrderedIndexOfEmoji("⌛")..OrderedIndexOfEmoji("🕦")], "Time", "⌛"),
+            Astral = new(AllOrdered[OrderedIndexOfEmoji("🌑")..OrderedIndexOfEmoji("⚡")], "Astral", "🌑"),
+            Misc = new(AllOrdered[OrderedIndexOfEmoji("⛄")..OrderedIndexOfEmoji("🪪")], "Misc", "⛄"),
+            Signs = new(AllOrdered[OrderedIndexOfEmoji("🏧")..OrderedIndexOfEmoji("🔲")], "Signs", "🏧"),
+            Flags = new(AllOrdered[OrderedIndexOfEmoji("🏁")..OrderedIndexOfEmoji("🏴󠁧󠁢󠁷󠁬󠁳󠁿")], "Flags", "🏁"),
         };
     }
 }
