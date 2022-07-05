@@ -85,9 +85,9 @@ namespace Chiron.UnicodeListGen
                     var range = code.Split("..");
                     int first = Convert.ToInt32("0x" + range[0].ToLower().Replace("u+", ""), 16);
                     int last = Convert.ToInt32("0x" + range[1].ToLower().Replace("u+", ""), 16);
-                    for (int i = first; i <= last; i++) yield return ((char)i).ToString();
+                    for (int i = first; i <= last; i++) yield return char.ConvertFromUtf32(i);
                 }
-                else sb.Append((char)Convert.ToInt32(("0x" + code.ToLower().Replace("u+", "")), 16));
+                else sb.Append(char.ConvertFromUtf32(Convert.ToInt32(("0x" + code.ToLower().Replace("u+", "")), 16)));
             }
             yield return sb.ToString();
         }

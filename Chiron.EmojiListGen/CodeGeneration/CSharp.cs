@@ -18,9 +18,9 @@ namespace Chiron.UnicodeListGen.CodeGeneration
             "    {\n" +
             "@content\n" +
             "        /// <summary> All contained unicode characters. </summary>\n" +
-            "        public static List<Unicode> All { get; } = (from p in typeof(EmojiList).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public) where p.PropertyType == typeof(Unicode) select (Unicode)p.GetValue(null)).ToList();\n" +
+            "        public static Unicode[] All { get; } = (from p in typeof(EmojiList).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public) where p.PropertyType == typeof(Unicode) select (Unicode)p.GetValue(null)).ToArray();\n" +
             "        \n" +
-            "        public static Dictionary<string, UnicodeVariation> CodePointLookup { get; } = CreateCodePointLookup();\n" +
+            "        static Dictionary<string, UnicodeVariation> CodePointLookup { get; } = CreateCodePointLookup();\n" +
             "        \n" +
             "        static Dictionary<string, UnicodeVariation> CreateCodePointLookup() {\n" +
             "            var res = new Dictionary<string, UnicodeVariation>();\n" +
@@ -32,14 +32,42 @@ namespace Chiron.UnicodeListGen.CodeGeneration
             "            }\n" +
             "            return res;\n" +
             "        }\n" +
-            "       \n" +
-            "        public static List<UnicodeVariation> AllOrdered { get; } = Ordered.Where(s => CodePointLookup.ContainsKey(s)).Select(s => CodePointLookup[s]).ToList();\n" +
+            "        \n" +
+            "        public static UnicodeVariation[] AllOrdered { get; } = Ordered.Where(s => CodePointLookup.ContainsKey(s)).Select(s => CodePointLookup[s]).ToArray();\n" +
+            "        \n" +
+            "        static int OrderedIndexOfEmoji(string emoji) {\n" +
+            "            int i = 0;\n" +
+            "            foreach (var e in AllOrdered) {\n" +
+            "                if (e.CodePoint == emoji) return i;\n" +
+            "                i++;\n" +
+            "            }\n" +
+            "            return -1;\n" +
+            "        }\n" +
+            "        \n" +
+            "        public static EmojiTabCollections Categories { get; } = new() {\n" +
+            "            Faces = new(AllOrdered[OrderedIndexOfEmoji(\"😀\")..OrderedIndexOfEmoji(\"🙊\")]),\n" +
+            "            Heart = new(AllOrdered[OrderedIndexOfEmoji(\"💋\")..OrderedIndexOfEmoji(\"💤\")]),\n" +
+            "            Hands = new(AllOrdered[OrderedIndexOfEmoji(\"👋\")..OrderedIndexOfEmoji(\"🫦\")]),\n" +
+            "            People = new(AllOrdered[OrderedIndexOfEmoji(\"👶\")..OrderedIndexOfEmoji(\"🦲\")]),\n" +
+            "            Animals = new(AllOrdered[OrderedIndexOfEmoji(\"🐵\")..OrderedIndexOfEmoji(\"🦠\")]),\n" +
+            "            Plants = new(AllOrdered[OrderedIndexOfEmoji(\"💐\")..OrderedIndexOfEmoji(\"🫘\")]),\n" +
+            "            Food = new(AllOrdered[OrderedIndexOfEmoji(\"🍇\")..OrderedIndexOfEmoji(\"🫙\")]),\n" +
+            "            Places = new(AllOrdered[OrderedIndexOfEmoji(\"🏺\")..OrderedIndexOfEmoji(\"🚞\")]),\n" +
+            "            Transportation = new(AllOrdered[OrderedIndexOfEmoji(\"🚋\")..OrderedIndexOfEmoji(\"🧳\")]),\n" +
+            "            Time = new(AllOrdered[OrderedIndexOfEmoji(\"⌛\")..OrderedIndexOfEmoji(\"🕦\")]),\n" +
+            "            Astral = new(AllOrdered[OrderedIndexOfEmoji(\"🌑\")..OrderedIndexOfEmoji(\"⚡\")]),\n" +
+            "            Misc = new(AllOrdered[OrderedIndexOfEmoji(\"⛄\")..OrderedIndexOfEmoji(\"🪪\")]),\n" +
+            "            Signs = new(AllOrdered[OrderedIndexOfEmoji(\"🏧\")..OrderedIndexOfEmoji(\"🔲\")]),\n" +
+            "            Flags = new(AllOrdered[OrderedIndexOfEmoji(\"🏁\")..OrderedIndexOfEmoji(\"🏴󠁧󠁢󠁷󠁬󠁳󠁿\")]),\n" +
+            "        };\n" +
             "    }\n" +
             "}\n";
 
         static string Unicode_cs { get; } = File.ReadAllText("Unicode.cs");
         static string UnicodeVariation_cs { get; } = File.ReadAllText("UnicodeVariation.cs");
         static string CodePointFormatter_cs { get; } = File.ReadAllText("CodePointFormatter.cs");
+        static string EmojiTabCollection_cs { get; } = File.ReadAllText("EmojiTabCollection.cs");
+        static string EmojiTabCollections_cs { get; } = File.ReadAllText("EmojiTabCollections.cs");
 
         static string GetUnicodeField(Unicode unicode) {
             var name =
@@ -76,7 +104,7 @@ namespace Chiron.UnicodeListGen.CodeGeneration
             StringBuilder content = new();
             foreach (var unicode in data) content.Append(GetUnicodeField(unicode) + '\n');
             content.Append(GetOrderingField(ordering));
-            return HEAD + Unicode_cs + UnicodeVariation_cs + CodePointFormatter_cs + BASE.Replace("@content", content.ToString());
+            return HEAD + Unicode_cs + UnicodeVariation_cs + EmojiTabCollection_cs + EmojiTabCollections_cs + CodePointFormatter_cs + BASE.Replace("@content", content.ToString());
         }
     }
 }
