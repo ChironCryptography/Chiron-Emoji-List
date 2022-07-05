@@ -11,16 +11,12 @@
             RGI_Emoji_ZWJ_Sequence,
         }
 
-        public int CodePoint { get; set; }
+        public string CodePoint { get; set; }
         public TypeFieldType TypeField { get; set; }
         public string Description { get; set; }
         public string[] Tags { get; set; } = new string[0];
 
-        public override string ToString() => 
-            char.ConvertFromUtf32(CodePoint);
-
-        public string ToCodePointRepresentation() =>
-            CodePointFormatter.ToCodePointRepresentation(CodePoint);
+        public override string ToString() => CodePoint;
     }
 }
 

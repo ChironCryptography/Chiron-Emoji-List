@@ -20,10 +20,10 @@ namespace Chiron.UnicodeListGen.CodeGeneration
             "        /// <summary> All contained unicode characters. </summary>\n" +
             "        public static List<Unicode> All { get; } = (from p in typeof(EmojiList).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public) where p.PropertyType == typeof(Unicode) select (Unicode)p.GetValue(null)).ToList();\n" +
             "        \n" +
-            "        public static Dictionary<int, UnicodeVariation> CodePointLookup { get; } = CreateCodePointLookup();\n" +
+            "        public static Dictionary<string, UnicodeVariation> CodePointLookup { get; } = CreateCodePointLookup();\n" +
             "        \n" +
-            "        static Dictionary<int, UnicodeVariation> CreateCodePointLookup() {\n" +
-            "            var res = new Dictionary<int, UnicodeVariation>();\n" +
+            "        static Dictionary<string, UnicodeVariation> CreateCodePointLookup() {\n" +
+            "            var res = new Dictionary<string, UnicodeVariation>();\n" +
             "            foreach (var u in All) {\n" +
             "                foreach (var v in u.Variations) {\n" +
             "                    if (res.ContainsKey(v.CodePoint)) continue;\n" +
@@ -61,7 +61,7 @@ namespace Chiron.UnicodeListGen.CodeGeneration
             var @base = "new Unicode(new UnicodeVariation[] { @new_variations })";
             var new_variations = string.Join(", ", (from v in unicode.Variations select 
                 $"new UnicodeVariation() {{ " +
-                    $"CodePoint = {v.CodePoint}, " +
+                    $"CodePoint = {v.CodePoint.ToLiteral()}, " +
                     $"Description = {v.Description.ToLiteral()}, " +
                     $"TypeField = {nameof(UnicodeVariation)}.{nameof(TypeFieldType)}.{v.TypeField}, " +
                     $"Tags = new string[] {{ {string.Join(", ", (from t in v.Tags select t.ToLiteral()))} }}" +
@@ -69,10 +69,10 @@ namespace Chiron.UnicodeListGen.CodeGeneration
             return @base.Replace("@new_variations", new_variations);
         }
 
-        static string GetOrderingField(List<int> ordering) => 
-            $"        static List<int> Ordered = new() {{ {string.Join(", ", ordering)} }};\n";
+        static string GetOrderingField(List<string> ordering) => 
+            $"        static List<string> Ordered = new() {{ {string.Join(", ", from o in ordering select o.ToLiteral())} }};\n";
         
-        public static string Generate(List<Unicode> data, List<int> ordering) {
+        public static string Generate(List<Unicode> data, List<string> ordering) {
             StringBuilder content = new();
             foreach (var unicode in data) content.Append(GetUnicodeField(unicode) + '\n');
             content.Append(GetOrderingField(ordering));

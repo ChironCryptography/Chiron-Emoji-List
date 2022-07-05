@@ -15,8 +15,8 @@ namespace Chiron.UnicodeListGen
         }
 
         /// <summary> Parse emoji-ordering.txt </summary>
-        public static List<int> ParseOrder(string text) {
-            var res = new List<int>();
+        public static List<string> ParseOrder(string text) {
+            var res = new List<string>();
             using var sr = new StringReader(text);
             string codepoints;
             while ((codepoints = sr.ReadLine()) != null) {
@@ -74,19 +74,22 @@ namespace Chiron.UnicodeListGen
                     Tags = tags
                 });
             }
+
             return res;
         }
 
-        public static IEnumerable<int> ParseCode(string code_line) {
+        public static IEnumerable<string> ParseCode(string code_line) {
+            StringBuilder sb = new();
             foreach (var code in code_line.Split(' ')) {
                 if (code.Contains("..")) {
                     var range = code.Split("..");
                     int first = Convert.ToInt32("0x" + range[0].ToLower().Replace("u+", ""), 16);
                     int last = Convert.ToInt32("0x" + range[1].ToLower().Replace("u+", ""), 16);
-                    for (int i = first; i <= last; i++) yield return i;
+                    for (int i = first; i <= last; i++) yield return ((char)i).ToString();
                 }
-                else yield return Convert.ToInt32(("0x" + code.ToLower().Replace("u+", "")), 16);
+                else sb.Append((char)Convert.ToInt32(("0x" + code.ToLower().Replace("u+", "")), 16));
             }
+            yield return sb.ToString();
         }
     }
 }
