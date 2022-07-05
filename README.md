@@ -28,7 +28,7 @@ foreach (var c in Chiron.EmojiList.Categories) {
 <p>p @Chiron.EmojiList.Airplane</p>
 
 @foreach (var c in Chiron.EmojiList.Categories) {
-    <MudText>@c.Name @c.Representitive</MudText>
+    <p>@c.Name @c.Representitive</p>
     @foreach (var e in c) {
         <p style="display: inline-block;">@e</p>
     }
