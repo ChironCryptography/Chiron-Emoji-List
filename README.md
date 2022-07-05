@@ -10,10 +10,14 @@ A simple list of all emoji characters and their tags. Included in this repo as w
 [Install the Nuget package.](https://www.nuget.org/packages/Chiron.EmojiList/)
 
 ```
+// Note: Your console most likely can't display emojis.
 Console.WriteLine(Chiron.EmojiList.Airplane);
 
-foreach (var e in Chiron.EmojiList.All) {
-    Console.WriteLine(e);
+foreach (var c in Chiron.EmojiList.Categories) {
+    Console.WriteLine(c.Name + c.Representitive.ToString())
+    foreach (var e in c) {
+        Console.WriteLine(e);
+    }
 }
 ```
 
@@ -23,12 +27,11 @@ foreach (var e in Chiron.EmojiList.All) {
 ```
 <p>p @Chiron.EmojiList.Airplane</p>
 
-@foreach (var e in Chiron.EmojiList.All) {
-    <p>
-    @foreach (var v in e.Variations) {
-        @v
+@foreach (var c in Chiron.EmojiList.Categories) {
+    <MudText>@c.Name @c.Representitive</MudText>
+    @foreach (var e in c) {
+        <p style="display: inline-block;">@e</p>
     }
-    </p>
 }
 ```
 
