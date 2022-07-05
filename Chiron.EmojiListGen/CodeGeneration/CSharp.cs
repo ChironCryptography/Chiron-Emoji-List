@@ -33,7 +33,7 @@ namespace Chiron.UnicodeListGen.CodeGeneration
             "            return res;\n" +
             "        }\n" +
             "       \n" +
-            "        public static List<UnicodeVariation> AllOrdered { get; } = (from o in Ordered select CodePointLookup[o]).ToList();\n" +
+            "        public static List<UnicodeVariation> AllOrdered { get; } = Ordered.Where(s => CodePointLookup.ContainsKey(s)).Select(s => CodePointLookup[s]).ToList();\n" +
             "    }\n" +
             "}\n";
 

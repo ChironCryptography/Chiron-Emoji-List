@@ -1650,6 +1650,6 @@ namespace Chiron
             return res;
         }
        
-        public static List<UnicodeVariation> AllOrdered { get; } = (from o in Ordered select CodePointLookup[o]).ToList();
+        public static List<UnicodeVariation> AllOrdered { get; } = Ordered.Where(s => CodePointLookup.ContainsKey(s)).Select(s => CodePointLookup[s]).ToList();
     }
 }
