@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
 
-	<PackageVersion>1.0.6</PackageVersion>
+	<PackageVersion>1.0.7</PackageVersion>
 	<RepositoryUrl>https://github.com/ChironCryptography/Chiron-Emoji-List</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
