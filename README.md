@@ -1,7 +1,5 @@
 # Chiron Cryptography, Inc.
 
-_**WARNING:**_ This package is still in development. It most likely won't work right.
-
 ### Chiron Unicode List
 A simple list of all emoji characters and their tags. Included in this repo as well is a code generation tool that can update the list automatically using official unicode.org data.
 
