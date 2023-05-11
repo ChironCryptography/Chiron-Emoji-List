@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Reflection;
 
-namespace Chiron.UnicodeListGen
+namespace Chiron.EmojiListGen
 {
     public static class Program
     {

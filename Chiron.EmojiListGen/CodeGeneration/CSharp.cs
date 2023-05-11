@@ -2,7 +2,7 @@
 using System.Text;
 using static Chiron.UnicodeVariation;
 
-namespace Chiron.UnicodeListGen.CodeGeneration
+namespace Chiron.EmojiListGen.CodeGeneration
 {
     internal static class CSharp
     {
