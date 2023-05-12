@@ -27,7 +27,7 @@ namespace Chiron.EmojiListGen
             return res;
         }
 
-            /// <summary> Indexed by description. </summary>
+            /// <summary> All emoji indexed by description. </summary>
             public static void Parse(string text, FileType file, Dictionary<string, Unicode> res) {
             using var sr = new StringReader(text);
             string line;
