@@ -5,12 +5,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
 
-	<PackageVersion>1.0.6</PackageVersion>
-	<RepositoryUrl>https://github.com/ChironCryptography/Chiron-Unicode-List</RepositoryUrl>
+	<PackageVersion>1.0.7</PackageVersion>
+	<RepositoryUrl>https://github.com/ChironCryptography/Chiron-Emoji-List</RepositoryUrl>
 	<RepositoryType>git</RepositoryType>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<Copyright>Chiron Cryptography, Inc.</Copyright>
-	<Authors>Chiron Cryptography Inc.</Authors>
-	<Description>A simple list of all emoji characters and their tags.</Description>
+	<Authors>Chiron Cryptography, Inc.</Authors>
+	<Description>A simple list and generator of all emoji characters and their tags.</Description>
   </PropertyGroup>
 </Project>

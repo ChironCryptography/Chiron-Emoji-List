@@ -1,12 +1,12 @@
 ﻿using System.Net;
 using System.Reflection;
 
-namespace Chiron.UnicodeListGen
+namespace Chiron.EmojiListGen
 {
     public static class Program
     {
         public static async Task Main(string[] args) {
-            Console.WriteLine("Downloading list of emojis from unicode.org...");
+            Console.WriteLine("Downloading list of emoji from unicode.org...");
             var sequences = await HttpHelper.DownloadFileAsText("https://unicode.org/Public/emoji/15.0/emoji-sequences.txt");
             var zwy_sequences = await HttpHelper.DownloadFileAsText("https://unicode.org/Public/emoji/15.0/emoji-zwj-sequences.txt");
             var emoji_ordering = await HttpHelper.DownloadFileAsText("https://unicode.org/emoji/charts/emoji-ordering.txt");

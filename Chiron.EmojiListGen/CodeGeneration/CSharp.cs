@@ -2,13 +2,13 @@
 using System.Text;
 using static Chiron.UnicodeVariation;
 
-namespace Chiron.UnicodeListGen.CodeGeneration
+namespace Chiron.EmojiListGen.CodeGeneration
 {
     internal static class CSharp
     {
         const string HEAD =
             "// ----------------------------------------------------------\n" +
-            "// This file is was auto-generated using Chiron.EmojiList.\n" +
+            "// This file was auto-generated using Chiron.EmojiList.\n" +
             "// ----------------------------------------------------------\n\n";
 
         const string BASE =
@@ -17,7 +17,7 @@ namespace Chiron.UnicodeListGen.CodeGeneration
             "    public static class EmojiList\n" +
             "    {\n" +
             "@content\n" +
-            "        /// <summary> All contained unicode characters. </summary>\n" +
+            "        /// <summary> All contained emoji unicode characters. </summary>\n" +
             "        public static Unicode[] All { get; } = (from p in typeof(EmojiList).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public) where p.PropertyType == typeof(Unicode) select (Unicode)p.GetValue(null)).ToArray();\n" +
             "        \n" +
             "        static Dictionary<string, UnicodeVariation> CodePointLookup { get; } = CreateCodePointLookup();\n" +
