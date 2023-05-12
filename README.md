@@ -1,9 +1,9 @@
 # Chiron Cryptography, Inc.
 
-_**WARNING:**_ This package is still in development and you may encounter issues. If you find an issue, please document it under [Issues](https://github.com/ChironCryptography/Chiron-Emoji-List/issues).
-
 ### Chiron Emoji List
-This package generates a list of all emoji unicode characters and their tags. It also includes a code generation tool which can automatically update the list using data published by unicode.org. This provides an optimized way to call, transfer, or generate emoji based on their values.
+This package provides a simple list of all unicode emoji characters and their tags. It also includes a code generation tool which can automatically update the list using data published by unicode.org.
+
+If you find an issue, please document it under [Issues](https://github.com/ChironCryptography/Chiron-Emoji-List/issues).
 
 ### Usage
 #### C#
