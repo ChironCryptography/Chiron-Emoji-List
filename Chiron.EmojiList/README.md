@@ -1,1 +1,1 @@
-See [the Github page](https://github.com/ChironCryptography/Chiron-Unicode-List) for more info.
+See [the Github page](https://github.com/ChironCryptography/Chiron-Emoji-List) for more info.

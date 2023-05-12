@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chiron.UnicodeListGen
+namespace Chiron.EmojiListGen
 {
     internal static class HttpHelper
     {

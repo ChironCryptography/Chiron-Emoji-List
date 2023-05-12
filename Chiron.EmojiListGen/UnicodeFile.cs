@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Chiron.UnicodeListGen
+namespace Chiron.EmojiListGen
 {
     internal static class UnicodeFile
     {
@@ -27,7 +27,7 @@ namespace Chiron.UnicodeListGen
             return res;
         }
 
-            /// <summary> Indexed by description. </summary>
+            /// <summary> All emoji indexed by description. </summary>
             public static void Parse(string text, FileType file, Dictionary<string, Unicode> res) {
             using var sr = new StringReader(text);
             string line;
